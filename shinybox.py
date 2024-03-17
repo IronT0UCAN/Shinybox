@@ -1117,11 +1117,18 @@ v^^^^^^^^^^^^^\n
 
     def sell_gold(self):
         vendor_portrait_label.config(text=f"{self.pawnshop}")
-        vendor_dialog_label.config(text=f"pawnshop: lay out ya gold on the scale\n")
-        self.gold_bar_count -= 1
-        gold_bar_label.config(text=f"you have {self.gold_bar_count} gold chunks!")
-        self.shiny_things += 10000
-        shiny_things_label.config(text=f"you have {self.shiny_things} shiny things!")
+        if self.god_bar_count >= 1:
+            vendor_dialog_label.config(text=f"pawnshop: lay out ya gold on the scale\n")
+            self.gold_bar_count -= 1
+            gold_bar_label.config(text=f"you have {self.gold_bar_count} gold chunks!")
+            self.shiny_things += 10000
+            shiny_things_label.config(text=f"you have {self.shiny_things} shiny things!")
+        elif self.god_bar_count <= 0:
+            vendor_dialog_label.config(text=f"pawnshop: go get some gold kid, quit wasting my time\n")
+            self.gold_bar_count -= 1
+            gold_bar_label.config(text=f"you have {self.gold_bar_count} gold chunks!")
+            self.shiny_things += 10000
+            shiny_things_label.config(text=f"you have {self.shiny_things} shiny things!")
     def convert_sticks(self):
         for widget in place_button_input_frame.winfo_children():
                 widget.destroy()
